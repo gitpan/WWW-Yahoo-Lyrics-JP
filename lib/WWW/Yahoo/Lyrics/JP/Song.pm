@@ -1,7 +1,6 @@
 package WWW::Yahoo::Lyrics::JP::Song;
 
 use Moose;
-our $VERSION = '0.01';
 
 has artist => (
     is  => 'rw',
@@ -50,27 +49,3 @@ sub link {
 1;
 __END__
 
-=head1 NAME
-
-WWW::Yahoo::Lyrics::JP::Song -
-
-=head1 SYNOPSIS
-
-  use WWW::Yahoo::Lyrics::JP;
-
-=head1 DESCRIPTION
-
-WWW::Yahoo::Lyrics::JP::Song is
-
-=head1 AUTHOR
-
-Yusuke Wada E<lt>yusuke at kamawada.comE<gt>
-
-=head1 SEE ALSO
-
-=head1 LICENSE
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-=cut

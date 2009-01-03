@@ -2,7 +2,8 @@ use inc::Module::Install;
 name 'WWW-Yahoo-Lyrics-JP';
 all_from 'lib/WWW/Yahoo/Lyrics/JP.pm';
 
-# requires '';
+requires 'Moose';
+requires 'URI::Escape';
 
 tests 't/*.t';
 author_tests 'xt';

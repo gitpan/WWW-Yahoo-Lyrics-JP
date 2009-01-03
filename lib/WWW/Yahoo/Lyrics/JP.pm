@@ -6,7 +6,7 @@ use LWP::UserAgent;
 use URI::Escape;
 use WWW::Yahoo::Lyrics::JP::Song;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 has 'ua' => (
     is      => 'rw',
@@ -25,18 +25,16 @@ no Moose;
 
 sub search {
     my ( $self, $args ) = @_;
-    my $song = WWW::Yahoo::Lyrics::JP::Song->new(
-        artist => $args->{artist},
-        title  => $args->{title}
-    );
+    my $song       = WWW::Yahoo::Lyrics::JP::Song->new($args);
     my $query      = _escape( $song->artist ) . "+" . _escape( $song->title );
-    my $url = $self->end_point . $query;
-    my $result_res = $self->ua->get( $url );
+    my $url        = $self->end_point . $query;
+    my $result_res = $self->ua->get($url);
     return $song unless $result_res->is_success;
-    if($result_res->content =~ m!<div id=\\"acx\\"><a href=\\"(.+?)\\">!){
-	$1 =~ m!(\d+)/(Y\d{6})$!;
-	$song->aid($1);
-	$song->id($2);
+    if ( $result_res->content =~ m!<div id=\\"acx\\"><a href=\\"(.+?)\\">! ) {
+        if ( $1 =~ m!(\d+)/(Y\d{6})$! ) {
+            $song->aid($1);
+            $song->id($2);
+        }
     }
     return $song;
 }
